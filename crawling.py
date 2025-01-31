@@ -11,20 +11,9 @@ driver = webdriver.Chrome(service= Service(ChromeDriverManager().install()))
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')  # headless 모드 (창을 띄우지 않음)
 
-url = "https://oasis.ssu.ac.kr/search/ebook-collections/"
+url = "https://oasis.ssu.ac.kr/search/ebook-collections?offset=0&max=100"
 driver.get(url)
 time.sleep(10)
-
-# 도서 정보를 찾아 변수에 저장 (By.CLASS_NAME 방식)
-#book_box = driver.find_element(By.CLASS_NAME, 'ikc-biblios ng-star-inserted')
-
-#book_titles = driver.find_elements(By.CLASS_NAME, "ikc-biblios ng-star-inserted")
-
-#for i in book_titles:
-    #title = i.text
-    #print(title)
-
-
 
 
 # 책 제목을 저장할 리스트
@@ -54,6 +43,13 @@ while True:
     except Exception as e:
         print(f"오류 발생: {e}")
         break
+
+# CSV 파일로 저장
+with open('book_titles.csv', mode='w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Book Title"])  # 헤더 작성
+    for title in book_titles:
+        writer.writerow([title])  # 책 제목을 한 줄씩 작성
 
 # 브라우저 종료
 driver.quit()
