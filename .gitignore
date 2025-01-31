@@ -1,5 +1,6 @@
-단행본(도서)정보.csv
-대출정보.csv
-통합_정보.csv
-통합_정보_합침.csv
-
+*.csv
+crawler_errors.log
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
